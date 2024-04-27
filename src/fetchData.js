@@ -4,6 +4,13 @@ let ciaData = null;
 
 const url = "https://app.zyte.com/api/v2/datasets/BX4OlpvTsKC/download?format=json"
 
+$accordion.innerHTML = `
+  <div class="text-center">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+`
 fetch(url)
   .then((response) => {
     return response.json();
@@ -22,8 +29,7 @@ fetch(url)
           data-toggle="collapse"
           data-target="#collapse${idx}"
           aria-expanded="true"
-          aria-controls="collapse${idx}"
-        >
+          aria-controls="collapse${idx}">
           ${x.title}
         </button>
       </h2>
@@ -33,8 +39,7 @@ fetch(url)
       id="collapse${idx}"
       class="collapse"
       aria-labelledby="heading${idx}"
-      data-parent="#accordion"
-    >
+      data-parent="#accordion">
       <div class="card-body">
         ${x.body}
         <br>
@@ -43,8 +48,9 @@ fetch(url)
       </div>
     </div>
   </div>
-    `
-    );
+  `);
+    $accordion.innerHTML = "";
+    
     for (i = 0; i < cards.length; i++) {
       $accordion.innerHTML += cards[i];
     }
